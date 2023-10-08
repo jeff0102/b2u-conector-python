@@ -113,7 +113,7 @@ def delete_pix_key(self, key: str):
     path_completion = {"key": key}
     url_path = "/api/v1/bankUser/api/delete-key/{key}".format(**path_completion)
     return self.sign_request_with_body(
-        "GET", url_path
+        "DELETE", url_path
     )
 
 def deliver_webhook_urls(self, withdrawURL: str, depositURL: str):
