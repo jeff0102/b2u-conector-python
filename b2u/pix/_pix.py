@@ -180,3 +180,25 @@ def pix_withdrawal(self, key: str, keyType: str, amount: float):
     return self.sign_request_with_body(
         "POST", "/api/v1/withdrawn/b2bank", body=body
     )
+
+def pix_withdrawal_copypaste(self, EMV: str, amount: float):
+    """POST Pix Withdrawal by Copypaste
+
+    POST /api/v1/withdrawn/b2bank-pix-qr
+
+    body (dict): JSON body for the request
+
+    body = {
+    "EMV": "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D",
+    "amount": 2.20
+    }
+
+    """
+
+    check_required_parameters([[EMV, "EMV"], [amount, "amount"]])
+    amount = "{:.2f}".format(amount)
+    body = {"EMV": EMV, "amount": amount, "description": "ok"}
+
+    return self.sign_request_with_body(
+        "POST", "/api/v1/withdrawn/b2bank-pix-qr", body=body
+    )
