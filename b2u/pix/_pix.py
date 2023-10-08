@@ -117,7 +117,7 @@ def delete_pix_key(self, key: str):
     )
 
 def deliver_webhook_urls(self, withdrawURL: str, depositURL: str):
-    """POST Get Statement
+    """POST Webhook
 
     POST /api/v1/webhook
 
