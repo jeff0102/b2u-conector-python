@@ -131,21 +131,33 @@ class API(object):
 
         return request_func(url, json=body, headers=headers)
 
+    # Dentro de la función _handle_exception
+
     def _handle_exception(self, response):
         status_code = response.status_code
         if status_code < 400:
             return
         if 400 <= status_code < 500:
             try:
-                err = json.loads(response.text)
-            except JSONDecodeError:
+                print(response.text)
+                err = response.json()  # Intenta analizar la respuesta JSON
+            except json.JSONDecodeError as e:
+                # Maneja una excepción si no se puede analizar la respuesta JSON
                 raise ClientError(
-                    status_code, None, response.text, None, response.headers
-                )
+                    status_code, None, "Failed to decode JSON response", response.headers
+                ) from e
+
+            # Verifica si 'code' está presente en 'err' antes de intentar acceder a él
+            if "code" in err:
+                error_code = err["code"]
+            else:
+                error_code = None
+
             error_data = None
             if "data" in err:
                 error_data = err["data"]
+
             raise ClientError(
-                status_code, err["code"], err["msg"], response.headers, error_data
+                status_code, error_code, err.get("msg", "Unknown error"), response.headers, error_data
             )
         raise ServerError(status_code, response.text)

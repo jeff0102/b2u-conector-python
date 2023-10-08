@@ -136,3 +136,47 @@ def deliver_webhook_urls(self, withdrawURL: str, depositURL: str):
     return self.sign_request_with_body(
         "POST", "/api/v1/webhook", body=body
     )
+
+def get_copypaste_pix_key_info(self, copypaste_key: str):
+    """POST Get EMV Data
+
+    POST /api/v1/withdrawn/b2bank-qr-data
+
+    body (dict): JSON body for the request
+
+    body = {
+    "EMV": "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D"
+    }
+
+    """
+
+    check_required_parameter(copypaste_key, "copypaste_key")
+    body = {"EMV": copypaste_key}
+
+    return self.sign_request_with_body(
+        "POST", "/api/v1/withdrawn/b2bank-qr-data", body=body
+    )
+
+def pix_withdrawal(self, key: str, keyType: str, amount: float):
+    """POST Pix Withdrawal
+
+    POST /api/v1/withdrawn/b2bank
+
+    body (dict): JSON body for the request
+
+    body = {
+    "key": "11773574612" (Required),
+    "keyType": "cpf" (Required),
+    "amount": 2.20 (Required),
+    "description": "anything"
+    }
+
+    """
+
+    check_required_parameters([[key, "key"], [keyType, "keyType"], [amount, "amount"]])
+    amount = "{:.2f}".format(amount)
+    body = {"key": key, "keyType": keyType, "amount": amount, "description": "ok"}
+
+    return self.sign_request_with_body(
+        "POST", "/api/v1/withdrawn/b2bank", body=body
+    )

@@ -3,5 +3,5 @@ venv
 config.ini
 __pycache__
 examples/b2u/test.py
-
+examples/b2u/responses_from_server.txt
 

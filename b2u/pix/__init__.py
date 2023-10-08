@@ -19,6 +19,7 @@ class B2u(API):
     # transactions
     from b2u.pix._pix import get_transaction_info
     from b2u.pix._pix import get_statement
+    from b2u.pix._pix import pix_withdrawal
 
     # webhook
     from b2u.pix._pix import deliver_webhook_urls
