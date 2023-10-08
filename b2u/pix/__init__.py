@@ -12,6 +12,7 @@ class B2u(API):
 
     # pix key
     from b2u.pix._pix import get_pix_key_info
+    from b2u.pix._pix import get_copypaste_pix_key_info
 
     # transactions
     from b2u.pix._pix import get_transaction_info

@@ -57,7 +57,6 @@ def get_statement(self, recent_date: str, lastet_date: str):
     body = {
     "from": "2023-01-01" (Required),
     "to": "2023-03-02" (Required),
-    "lang": "pt_BR" (Required)
     }
 
     """
@@ -67,4 +66,24 @@ def get_statement(self, recent_date: str, lastet_date: str):
 
     return self.sign_request_with_body(
         "POST", "/api/v1/withdrawn/extract/transfers-b2ubank", body=body
+    )
+
+def get_copypaste_pix_key_info(self, copypaste_key: str):
+    """POST Get EMV Data
+
+    POST /api/v1/withdrawn/b2bank-qr-data
+
+    body (dict): JSON body for the request
+
+    body = {
+    "EMV": "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D"
+    }
+
+    """
+
+    check_required_parameter(copypaste_key, "copypaste_key")
+    body = {"EMV": copypaste_key}
+
+    return self.sign_request_with_body(
+        "POST", "/api/v1/withdrawn/b2bank-qr-data", body=body
     )
