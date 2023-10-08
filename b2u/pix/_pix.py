@@ -87,3 +87,14 @@ def get_copypaste_pix_key_info(self, copypaste_key: str):
     return self.sign_request_with_body(
         "POST", "/api/v1/withdrawn/b2bank-qr-data", body=body
     )
+
+def get_pix_keys_list(self):
+    """GET List PIX Keys
+
+    GET /api/v1/bankUser/api/list-keys
+
+    """
+
+    return self.sign_request_with_body(
+        "GET", "/api/v1/bankUser/api/list-keys"
+    )
