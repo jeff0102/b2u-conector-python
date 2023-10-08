@@ -126,6 +126,7 @@ class API(object):
         request_func = {
             "GET": self.session.get,
             "POST": self.session.post,
+            "DELETE": self.session.delete
         }.get(http_method)
 
         return request_func(url, json=body, headers=headers)

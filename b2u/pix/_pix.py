@@ -98,3 +98,41 @@ def get_pix_keys_list(self):
     return self.sign_request_with_body(
         "GET", "/api/v1/bankUser/api/list-keys"
     )
+
+def delete_pix_key(self, key: str):
+    """Delete PIX Key
+
+    DELETE /api/v1/bankUser/api/delete-key/:key
+
+    Args:
+    key : "string" (Required)
+
+    """
+
+    check_required_parameter(key, "key")
+    path_completion = {"key": key}
+    url_path = "/api/v1/bankUser/api/delete-key/{key}".format(**path_completion)
+    return self.sign_request_with_body(
+        "GET", url_path
+    )
+
+def deliver_webhook_urls(self, withdrawURL: str, depositURL: str):
+    """POST Get Statement
+
+    POST /api/v1/webhook
+
+    body (dict): JSON body for the request
+
+    body = {
+    "withdrawURL": "https://test.com" (Required),
+    "depositURL": "https://test.com" (Required),
+    }
+
+    """
+
+    check_required_parameters([[withdrawURL, "withdrawURL"], [depositURL, "depositURL"]])
+    body = {"withdrawURL": withdrawURL, "depositURL": depositURL}
+
+    return self.sign_request_with_body(
+        "POST", "/api/v1/webhook", body=body
+    )
