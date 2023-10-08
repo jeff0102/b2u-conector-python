@@ -10,3 +10,6 @@ class B2u(API):
     # account info
     from b2u.pix._pix import get_ballance
 
+    # pix key
+    from b2u.pix._pix import get_pix_key_info
+

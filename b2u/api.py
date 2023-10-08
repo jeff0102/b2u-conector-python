@@ -28,9 +28,7 @@ class API(object):
         timeout=None,
         proxies=None,
         show_limit_usage=False,
-        show_header=False,
-        private_key=None,
-        private_key_pass=None,
+        show_header=False
     ):
         self.api_key = api_key
         self.api_secret = api_secret
@@ -39,8 +37,6 @@ class API(object):
         self.proxies = None
         self.show_limit_usage = False
         self.show_header = False
-        self.private_key = private_key
-        self.private_key_pass = private_key_pass
         self.session = requests.Session()
         self.session.headers.update(
             {
