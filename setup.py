@@ -6,7 +6,7 @@ with open(
 ) as fh:
     requirements = fh.readlines()
 
-NAME = "b2u-connector-python"
+NAME = "b2u-conector-python"
 DESCRIPTION = (
     "This is a lightweight library that works as a connector to b2u bank public API."
 )
