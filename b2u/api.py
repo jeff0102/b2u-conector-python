@@ -139,8 +139,11 @@ class API(object):
         if 400 <= status_code < 500:
             try:
                 err = response.json()
+                if 'error' in err and 'data' in err and 'message' in err['data']:
+                    error_message = err['data']['message']
+                else:
+                    error_message = "Unknown error"
             except json.JSONDecodeError as e:
-
                 raise ClientError(
                     status_code, None, "Failed to decode JSON response", response.headers
                 ) from e
@@ -155,6 +158,6 @@ class API(object):
                 error_data = err["data"]
 
             raise ClientError(
-                status_code, error_code, err.get("msg", "Unknown error"), response.headers, error_data
+                status_code, error_code, error_message, response.headers, error_data
             )
         raise ServerError(status_code, response.text)
