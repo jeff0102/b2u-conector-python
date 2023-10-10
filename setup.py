@@ -8,7 +8,7 @@ with open(
 
 NAME = "b2u-conector-python"
 DESCRIPTION = (
-    "This is a lightweight library that works as a connector to b2u bank public API."
+    "This is a lightweight library that works as a conector to b2u bank public API."
 )
 AUTHOR = "jeff0102"
 URL = "https://github.com/jeff0102/b2u-conector-python"
