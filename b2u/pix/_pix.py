@@ -157,7 +157,7 @@ def get_copypaste_pix_key_info(self, copypaste_key: str):
         "POST", "/api/v1/withdrawn/b2bank-qr-data", body=body
     )
 
-def pix_withdrawal(self, key: str, keyType: str, amount: float, description: str):
+def pix_withdrawal(self, key: str, keyType: str, amount: str, **kwargs):
     """POST Pix Withdrawal
 
     POST /api/v1/withdrawn/b2bank
@@ -173,9 +173,9 @@ def pix_withdrawal(self, key: str, keyType: str, amount: float, description: str
 
     """
 
-    check_required_parameters([[key, "key"], [keyType, "keyType"], [amount, "amount"],  [description, "description"]])
+    check_required_parameters([[key, "key"], [keyType, "keyType"], [amount, "amount"]])
     amount = "{:.2f}".format(amount)
-    body = {"key": key, "keyType": keyType, "amount": amount, "description": description}
+    body = {"key": key, "keyType": keyType, "amount": amount, **kwargs}
 
     return self.sign_request_with_body(
         "POST", "/api/v1/withdrawn/b2bank", body=body
