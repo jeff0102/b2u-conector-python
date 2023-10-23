@@ -157,7 +157,7 @@ def get_copypaste_pix_key_info(self, copypaste_key: str):
         "POST", "/api/v1/withdrawn/b2bank-qr-data", body=body
     )
 
-def pix_withdrawal(self, key: str, keyType: str, amount: str, **kwargs):
+def pix_withdrawal(self, key: any, amount: str, **kwargs):
     """POST Pix Withdrawal
 
     POST /api/v1/withdrawn/b2bank
@@ -166,22 +166,21 @@ def pix_withdrawal(self, key: str, keyType: str, amount: str, **kwargs):
 
     body = {
     "key": "11773574612" (Required),
-    "keyType": "cpf" (Required),
+    "keyType": "cpf" ,
     "amount": 2.20 (Required),
     "description": "anything"
     }
 
     """
 
-    check_required_parameters([[key, "key"], [keyType, "keyType"], [amount, "amount"]])
-    amount = "{:.2f}".format(amount)
-    body = {"key": key, "keyType": keyType, "amount": amount, **kwargs}
+    check_required_parameters([[key, "key"], [amount, "amount"]])
+    body = {"key": key, "amount": amount, **kwargs}
 
     return self.sign_request_with_body(
         "POST", "/api/v1/withdrawn/b2bank", body=body
     )
 
-def pix_withdrawal_copypaste(self, EMV: str, amount: float):
+def pix_withdrawal_copypaste(self, EMV: str, amount: float, **kwargs):
     """POST Pix Withdrawal by Copypaste
 
     POST /api/v1/withdrawn/b2bank-pix-qr
@@ -197,7 +196,7 @@ def pix_withdrawal_copypaste(self, EMV: str, amount: float):
 
     check_required_parameters([[EMV, "EMV"], [amount, "amount"]])
     amount = "{:.2f}".format(amount)
-    body = {"EMV": EMV, "amount": amount, "description": "ok"}
+    body = {"EMV": EMV, "amount": amount, **kwargs}
 
     return self.sign_request_with_body(
         "POST", "/api/v1/withdrawn/b2bank-pix-qr", body=body
