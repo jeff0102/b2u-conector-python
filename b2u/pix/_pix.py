@@ -180,7 +180,7 @@ def pix_withdrawal(self, key: any, amount: str, **kwargs):
         "POST", "/api/v1/withdrawn/b2bank", body=body
     )
 
-def pix_withdrawal_copypaste(self, EMV: str, amount: float, **kwargs):
+def pix_withdrawal_copypaste(self, EMV: str, amount: str, **kwargs):
     """POST Pix Withdrawal by Copypaste
 
     POST /api/v1/withdrawn/b2bank-pix-qr
