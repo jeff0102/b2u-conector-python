@@ -195,7 +195,6 @@ def pix_withdrawal_copypaste(self, EMV: str, amount: str, **kwargs):
     """
 
     check_required_parameters([[EMV, "EMV"], [amount, "amount"]])
-    amount = "{:.2f}".format(amount)
     body = {"EMV": EMV, "amount": amount, **kwargs}
 
     return self.sign_request_with_body(
