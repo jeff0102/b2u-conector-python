@@ -14,4 +14,6 @@ This library facilitates integration with the B2U Bank system, offering function
 8. **Perform PIX Withdrawal**
 9. **Perform PIX Withdrawal by Copy and Paste**
 
+For more detailed information about the B2U Bank API, please visit the [official API documentation](https://apidoc.b2ubank.com).
+
 **Note:** This is a summary; the code has additional documentation details and usage examples.
